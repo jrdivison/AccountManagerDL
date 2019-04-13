@@ -10,5 +10,11 @@
         public T Id { get; set; } 
         [Timestamp]
         public byte[] RowVersion { get; set; }
+
+        public bool IsNewModel()
+        {
+            return Id.Equals(default(T));
+        }
+  
     }
 }

@@ -6,9 +6,11 @@
     using AutoMapper;
     using System.Linq.Expressions;
 
-    public abstract class DataServiceBase<TEntity, TContext>
-        where TEntity : class       //accept only classes
-        where TContext : DbContext  //acept only DbContext class
+    //Comunicarse con la capa de datos
+    public abstract class DataServiceBase<TEntity, TId, TContext>
+        where TId: IEquatable<TId>
+        where TEntity : ModelBase<TId> //accept only classes
+        where TContext : DbContext     //acept only DbContext class
     {
         protected DataServiceBase(IMapper mapper, TContext context)
         {
@@ -19,6 +21,29 @@
         protected TContext Context { get; set; }
         protected IMapper Mapper { get; set; }
 
+        public int AddOrUpdate<TDto> (TDto model)
+        {
+            TEntity entity = Mapper.Map<TEntity>(model);
+            if (!BeforeAddOrUpdate(entity))
+            {
+                throw new Exception("Data validation error");
+            }
+
+            if (entity.IsNewModel())
+            {
+                Context.Add(entity);
+            } else
+            {
+                TEntity originalEntity = Context.Find<TEntity>(entity.Id);
+                originalEntity = Mapper.Map(model, originalEntity);
+            }
+            return Context.SaveChanges();
+        }
+
+        public virtual bool BeforeAddOrUpdate(TEntity entity)
+        {
+            return true;
+        }
         //Data Transport Object = DTO
         public IQueryable<TDto> GetAll<TDto>()
         {

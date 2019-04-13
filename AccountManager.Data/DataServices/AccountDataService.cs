@@ -5,7 +5,7 @@
     using AutoMapper;
 
     public class AccountDataService 
-        : DataServiceBase<AccountDataService, AccountManagerDBContext>
+        : DataServiceBase<Account, int,AccountManagerDBContext>
     {
         public AccountDataService(IMapper mapper,
             AccountManagerDBContext context)
