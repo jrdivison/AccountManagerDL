@@ -14,7 +14,7 @@ namespace AccountManager.Data.Factory
             var optionsBuilder = 
                 new DbContextOptionsBuilder<AccountManagerDbContext>();
 
-            optionsBuilder.UseSqlServer(@"Server=.; Database=AccountManagerDb;Integrated Security=true",
+            optionsBuilder.UseSqlServer(@"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=AccountManagerModule;Integrated Security=True;",
                 option=> option.MigrationsAssembly(
                     typeof(AccountManagerDbContext).Assembly.FullName));
 

@@ -11,5 +11,11 @@ namespace AccountManager.Data.Core
 
         [Timestamp]
         public byte[] RowVersion { get; set; }
+
+        public bool IsNewModel()
+        {
+            return Id.Equals(default(T));
+        }
+
     }
 }

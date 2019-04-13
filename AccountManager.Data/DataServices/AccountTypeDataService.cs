@@ -8,7 +8,7 @@ using System.Text;
 namespace AccountManager.Data.DataServices
 {
     public class AccountTypeDataService
-        : DataServiceBase<AccountType, AccountManagerDbContext>
+        : DataServiceBase<AccountType, int,  AccountManagerDbContext>
     {
         public AccountTypeDataService(IMapper mapper, 
             AccountManagerDbContext context)
@@ -16,5 +16,7 @@ namespace AccountManager.Data.DataServices
         {
             
         }
+
+     
     }
 }
