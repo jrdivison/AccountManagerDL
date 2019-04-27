@@ -1,9 +1,11 @@
-﻿namespace AccountManager.Data.Models
-{
-    using System.Collections.Generic;
-    using AccountManager.Data.Core;   
+﻿using AccountManager.Data.Core;
+using System;
+using System.Collections.Generic;
+using System.Text;
 
-    public class AccountType : ModelBase<int>
+namespace AccountManager.Data.Models
+{
+    public class AccountType: ModelBase<int>
     {
         public string Code { get; set; }
         public string Name { get; set; }

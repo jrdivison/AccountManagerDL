@@ -9,9 +9,9 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AccountManager.Data.Migrations
 {
-    [DbContext(typeof(AccountManagerDBContext))]
-    [Migration("20190406175428_AddConcurency")]
-    partial class AddConcurency
+    [DbContext(typeof(AccountManagerDbContext))]
+    [Migration("20190406175400_AddConcurrency")]
+    partial class AddConcurrency
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -41,6 +41,10 @@ namespace AccountManager.Data.Migrations
 
                     b.HasIndex("AccountTypeId");
 
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasFilter("[Code] IS NOT NULL");
+
                     b.ToTable("Account");
                 });
 
@@ -59,6 +63,10 @@ namespace AccountManager.Data.Migrations
                         .ValueGeneratedOnAddOrUpdate();
 
                     b.HasKey("Id");
+
+                    b.HasIndex("Code")
+                        .IsUnique()
+                        .HasFilter("[Code] IS NOT NULL");
 
                     b.ToTable("AccountType");
                 });

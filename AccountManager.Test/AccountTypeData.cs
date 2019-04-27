@@ -1,39 +1,43 @@
+using AccountManager.Data;
+using AccountManager.Data.DataServices;
+using AccountManager.Data.Factory;
+using AccountManager.Data.Models;
+using AccountManager.Data.Models.DTO;
+using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+
 namespace AccountManager.Test
 {
-    using Microsoft.EntityFrameworkCore;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
-    using AccountManager.Data;
-    using AccountManager.Data.Factory;
-    using AccountManager.Data.Models;
-
     [TestClass]
     public class AccountTypeData
     {
-        private AccountManagerDBContext context;
+        private AccountTypeDataService dataService;
 
         public AccountTypeData()
         {
-            var factory = new AcountManagerDesignTimeFactory();
-            context = factory.CreateDbContext(new string[] { });
-            //t context.Database.Migrate();
+            var factory = new AccountManagerDesignTimeFactory();
+            AccountManagerDbContext context = factory.CreateDbContext(new string[] { });
+            context.Database.Migrate();
+
+            var mapperConfiguration = new MapperConfiguration(opt =>
+            {
+                opt.AddProfile<MapperProfile>();
+            });
+            dataService = new AccountTypeDataService(mapperConfiguration.CreateMapper(), context);
         }
 
         [TestMethod]
         public void AddOk()
         {
             int rowsAffected = 0;
-            AccountType accountType = new AccountType
+            AccountTypeDTO accountType = new AccountTypeDTO
             {
                 Code = "ACT",
-                Name = "Acivos"
+                Name = "Activos"
             };
 
-            context.AccountType.Add(accountType);
-
-            if (context.ChangeTracker.HasChanges())
-            {
-                rowsAffected = context.SaveChanges();
-            }
+            rowsAffected = dataService.AddOrUpdate(accountType);
 
             Assert.AreNotEqual(0, rowsAffected);
         }

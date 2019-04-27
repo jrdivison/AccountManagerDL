@@ -8,5 +8,6 @@ namespace AccountManager.Data.Models.DTO
     {
         public TId Id { get; set; }
         public string Description { get; set; }
+
     }
 }

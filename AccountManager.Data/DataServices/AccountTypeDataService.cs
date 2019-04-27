@@ -7,14 +7,16 @@ using System.Text;
 
 namespace AccountManager.Data.DataServices
 {
-    public class AccountTypeDataService :
-        DataServiceBase<AccountType, int, AccountManagerDBContext>
+    public class AccountTypeDataService
+        : DataServiceBase<AccountType, int,  AccountManagerDbContext>
     {
         public AccountTypeDataService(IMapper mapper, 
-            AccountManagerDBContext context) 
+            AccountManagerDbContext context)
             : base(mapper, context)
         {
-
+            
         }
+
+     
     }
 }

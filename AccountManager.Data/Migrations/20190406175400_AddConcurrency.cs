@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AccountManager.Data.Migrations
 {
-    public partial class AddConcurency : Migration
+    public partial class AddConcurrency : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
