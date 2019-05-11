@@ -8,28 +8,29 @@ namespace AccountManager.API.Account
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class AccountController
+    public class AccountTypeController
         : ControllerBase
     {
 
-        private AccountDataService service;
-        public AccountController(AccountDataService service)
+        private AccountTypeDataService service;
+        public AccountTypeController(AccountTypeDataService service)
         {
 
             this.service = service;
         }
 
         [HttpGet]
-        public IEnumerable<AccountDTO> Get()
+        public IActionResult Get()
         {
-            var result = service.GetAll<AccountDTO>();
-            return result;
+
+            var result = service.GetAll<AccountTypeDTO>();
+            return Ok(result);
         }
 
         [HttpPost]
-        public IActionResult AddOrupdate([FromBody] AccountDTO model)
+        public IActionResult AddOrupdate([FromBody] AccountTypeDTO model)
         {
-            service.AddOrUpdate<AccountDTO>(model);
+            service.AddOrUpdate<AccountTypeDTO>(model);
             return Ok();
         }
     }

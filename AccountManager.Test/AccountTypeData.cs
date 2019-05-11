@@ -18,7 +18,7 @@ namespace AccountManager.Test
         {
             var factory = new AccountManagerDesignTimeFactory();
             AccountManagerDbContext context = factory.CreateDbContext(new string[] { });
-            context.Database.Migrate();
+
 
             var mapperConfiguration = new MapperConfiguration(opt =>
             {
@@ -33,8 +33,8 @@ namespace AccountManager.Test
             int rowsAffected = 0;
             AccountTypeDTO accountType = new AccountTypeDTO
             {
-                Code = "ACT",
-                Name = "Activos"
+                Code = "PAS",
+                Name = "Pasivos"
             };
 
             rowsAffected = dataService.AddOrUpdate(accountType);

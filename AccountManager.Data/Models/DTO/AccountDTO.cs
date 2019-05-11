@@ -6,10 +6,11 @@ namespace AccountManager.Data.Models.DTO
 {
     public class AccountDTO
     {
+        public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }
-        
-        public ViewModelParent<int> AccountType { get; set; }
-        public int AccountTypeId { get; set; }
+
+
+        public ViewModelParent<int> AccountType { get; set; }        
     }
 }

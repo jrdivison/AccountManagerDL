@@ -7,11 +7,14 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
+using AccountManager.Data.DataServices;
+using AutoMapper;
+using Swashbuckle.AspNetCore.Swagger;
 
 namespace AccountManager.API
 {
@@ -28,7 +31,23 @@ namespace AccountManager.API
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddDbContext<AccountManagerDbContext>(opt =>
-            opt.UseSqlServer(Configuration.GetConnectionString("default")));
+            {
+
+                opt.UseSqlServer(Configuration.GetConnectionString("default"), o =>
+                {
+                    o.MigrationsAssembly(typeof(AccountManagerDbContext).Assembly.FullName);
+                });
+            });
+            services.AddAutoMapper();
+            services.AddTransient<AccountDataService>();
+            services.AddTransient<AccountTypeDataService>();
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info {
+                    Title= "Demo API",
+                    Version ="v1"
+                });
+            });
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
 
@@ -44,10 +63,12 @@ namespace AccountManager.API
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
-            app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
 
+            app.UseSwagger();
+            app.UseSwaggerUI(c=>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api Demo");
+                c.RoutePrefix = string.Empty;
             });
             app.UseHttpsRedirection();
             app.UseMvc();

@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace AccountManager.Data.Migrations
@@ -13,6 +14,7 @@ namespace AccountManager.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
                     Code = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true)
                 },
@@ -27,6 +29,7 @@ namespace AccountManager.Data.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
+                    RowVersion = table.Column<byte[]>(rowVersion: true, nullable: true),
                     Code = table.Column<string>(nullable: true),
                     Name = table.Column<string>(nullable: true),
                     AccountTypeId = table.Column<int>(nullable: false)
@@ -46,6 +49,20 @@ namespace AccountManager.Data.Migrations
                 name: "IX_Account_AccountTypeId",
                 table: "Account",
                 column: "AccountTypeId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Account_Code",
+                table: "Account",
+                column: "Code",
+                unique: true,
+                filter: "[Code] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_AccountType_Code",
+                table: "AccountType",
+                column: "Code",
+                unique: true,
+                filter: "[Code] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
