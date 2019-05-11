@@ -1,11 +1,13 @@
-﻿namespace AccountManager.Data.Core
-{
-    using AutoMapper;
-    using Microsoft.EntityFrameworkCore;
-    using System;
-    using System.Linq;
-    using System.Linq.Expressions;
+﻿using AutoMapper;
+using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 
+namespace AccountManager.Data.Core
+{
     public abstract class DataServiceBase<TEntity, TId, TContext>
         where TId: IEquatable<TId>
         where TEntity: ModelBase<TId>
@@ -24,7 +26,7 @@
         {
             TEntity entity = Mapper.Map<TEntity>(model);
             if (!BeforeAddOrupdate(entity))
-                throw new Exception("Error de validación");
+                throw new Exception("Error de validacion");
 
             if(entity.IsNewModel())
             {
@@ -65,11 +67,11 @@
                 Context.SaveChanges();
         }
 
-        public TDTo GetById<TDTo>(TId id)
+        public TDto GetById<TDto>(TId id)
         {
             DbSet<TEntity> table = Context.Set<TEntity>();
             TEntity entity = table.Find(id);
-            return Mapper.Map<TDTo>(entity);
+            return Mapper.Map<TDto>(entity);
         }
     }
 }

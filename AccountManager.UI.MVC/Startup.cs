@@ -36,10 +36,11 @@ namespace AccountManager.UI.MVC
                     o.MigrationsAssembly(typeof(AccountManagerDbContext).Assembly.FullName);
                 });
             });
-            services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+            services
+                .AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
             services.AddTransient<AccountDataService>();
             services.AddTransient<AccountTypeDataService>();
-
             services.Configure<CookiePolicyOptions>(options =>
             {
                 // This lambda determines whether user consent for non-essential cookies is needed for a given request.

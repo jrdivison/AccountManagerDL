@@ -1,11 +1,17 @@
-﻿namespace AccountManager.UI.MVC.Controllers
-{
-    using Microsoft.AspNetCore.Mvc;
-    using Microsoft.EntityFrameworkCore;
-    using System.Threading.Tasks;
-    using AccountManager.Data.DataServices;
-    using AccountManager.Data.Models.DTO;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using Microsoft.EntityFrameworkCore;
+using AccountManager.Data;
+using AccountManager.Data.Models;
+using AccountManager.Data.DataServices;
+using AccountManager.Data.Models.DTO;
 
+namespace AccountManager.UI.MVC.Controllers
+{
     public class AccountTypesController : Controller
     {
         private readonly AccountTypeDataService service;
@@ -30,6 +36,7 @@
             }
 
             var accountTypeDTO = service.GetById<AccountTypeDTO>(id.Value);
+
             if (accountTypeDTO == null)
             {
                 return NotFound();
@@ -68,6 +75,7 @@
             }
 
             var accountTypeDTO = service.GetById<AccountTypeDTO>(id.Value);
+
             if (accountTypeDTO == null)
             {
                 return NotFound();
@@ -80,7 +88,7 @@
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, AccountTypeDTO accountTypeDTO)
+        public async Task<IActionResult> Edit(int id,  AccountTypeDTO accountTypeDTO)
         {
             if (id != accountTypeDTO.Id)
             {
@@ -95,7 +103,8 @@
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    return NotFound();                    
+                     return NotFound();
+                 
                 }
                 return RedirectToAction(nameof(Index));
             }
@@ -103,7 +112,7 @@
         }
 
         // GET: AccountTypes/Delete/5
-        public IActionResult Delete(int? id)
+        public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
             {
@@ -115,14 +124,14 @@
             {
                 return NotFound();
             }
-            service.Delete(id.Value);
             return View(accountTypeDTO);
+            
         }
 
         // POST: AccountTypes/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public IActionResult DeleteConfirmed(int id)
+        public async Task<IActionResult> DeleteConfirmed(int id)
         {
             service.Delete(id);
             return RedirectToAction(nameof(Index));
