@@ -1,17 +1,27 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.28729.10
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.421
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManager.Data", "AccountManager.Data\AccountManager.Data.csproj", "{7BFF886C-2A3F-4396-B5D2-6EA21B104216}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManager.Test", "AccountManager.Test\AccountManager.Test.csproj", "{81802CB6-B02D-474A-AC01-1F628AF0ECA7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManager.API", "AccountManager.API\AccountManager.API.csproj", "{DD663BB7-9D3F-41FD-9F74-60E16037D381}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManager.API", "AccountManager.API\AccountManager.API.csproj", "{DD663BB7-9D3F-41FD-9F74-60E16037D381}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManager.API.Account", "AccountManager.API.Account\AccountManager.API.Account.csproj", "{767E5277-4BC9-409C-B035-5EA32556729A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManager.API.Account", "AccountManager.API.Account\AccountManager.API.Account.csproj", "{767E5277-4BC9-409C-B035-5EA32556729A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManager.API.AccountType", "AccountManager.API.AccountType\AccountManager.API.AccountType.csproj", "{BD46F9F7-2ADF-471E-AF70-054754665116}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccountManager.API.AccountType", "AccountManager.API.AccountType\AccountManager.API.AccountType.csproj", "{BD46F9F7-2ADF-471E-AF70-054754665116}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "api", "api", "{C5FE8D72-3C79-4183-8B8C-A4433B09922A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "libs", "libs", "{2568986E-BFD6-4363-B856-8F8E92EF2A9E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{329B11AD-E4C9-4949-9632-DBC8558410E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "UI", "UI", "{7ABB4C42-FF58-4276-9FB2-14954DC4F496}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccountManager.UI.MVC", "AccountManager.UI.MVC\AccountManager.UI.MVC.csproj", "{1A8EFF4B-56D5-4E2B-A6B5-14E00B498618}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,9 +49,21 @@ Global
 		{BD46F9F7-2ADF-471E-AF70-054754665116}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BD46F9F7-2ADF-471E-AF70-054754665116}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BD46F9F7-2ADF-471E-AF70-054754665116}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A8EFF4B-56D5-4E2B-A6B5-14E00B498618}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A8EFF4B-56D5-4E2B-A6B5-14E00B498618}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A8EFF4B-56D5-4E2B-A6B5-14E00B498618}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A8EFF4B-56D5-4E2B-A6B5-14E00B498618}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{7BFF886C-2A3F-4396-B5D2-6EA21B104216} = {2568986E-BFD6-4363-B856-8F8E92EF2A9E}
+		{81802CB6-B02D-474A-AC01-1F628AF0ECA7} = {329B11AD-E4C9-4949-9632-DBC8558410E4}
+		{DD663BB7-9D3F-41FD-9F74-60E16037D381} = {C5FE8D72-3C79-4183-8B8C-A4433B09922A}
+		{767E5277-4BC9-409C-B035-5EA32556729A} = {C5FE8D72-3C79-4183-8B8C-A4433B09922A}
+		{BD46F9F7-2ADF-471E-AF70-054754665116} = {C5FE8D72-3C79-4183-8B8C-A4433B09922A}
+		{1A8EFF4B-56D5-4E2B-A6B5-14E00B498618} = {7ABB4C42-FF58-4276-9FB2-14954DC4F496}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B99483ED-02DB-4B60-BC28-885FC02EBE0D}

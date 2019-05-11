@@ -1,13 +1,11 @@
-﻿using AutoMapper;
-using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-
-namespace AccountManager.Data.Core
+﻿namespace AccountManager.Data.Core
 {
+    using AutoMapper;
+    using Microsoft.EntityFrameworkCore;
+    using System;
+    using System.Linq;
+    using System.Linq.Expressions;
+
     public abstract class DataServiceBase<TEntity, TId, TContext>
         where TId: IEquatable<TId>
         where TEntity: ModelBase<TId>
@@ -26,7 +24,7 @@ namespace AccountManager.Data.Core
         {
             TEntity entity = Mapper.Map<TEntity>(model);
             if (!BeforeAddOrupdate(entity))
-                throw new Exception("Error de validacion");
+                throw new Exception("Error de validación");
 
             if(entity.IsNewModel())
             {
@@ -52,12 +50,26 @@ namespace AccountManager.Data.Core
             return Mapper.ProjectTo<TDto>(table);
         }
 
-
-
-        public IQueryable<TDto> GeTAll<TDto>(Expression<Func<TEntity, bool>> filter)
+        public IQueryable<TDto> GetAll<TDto>(Expression<Func<TEntity, bool>> filter)
         {
             DbSet<TEntity> table = Context.Set<TEntity>();
             return Mapper.ProjectTo<TDto>(table.Where(filter));
+        }
+
+        public void Delete(TId id)
+        {
+            DbSet<TEntity> table = Context.Set<TEntity>();
+            TEntity entityDelete = table.Find(id);
+            table.Remove(entityDelete);
+            if (Context.ChangeTracker.HasChanges())
+                Context.SaveChanges();
+        }
+
+        public TDTo GetById<TDTo>(TId id)
+        {
+            DbSet<TEntity> table = Context.Set<TEntity>();
+            TEntity entity = table.Find(id);
+            return Mapper.Map<TDTo>(entity);
         }
     }
 }
