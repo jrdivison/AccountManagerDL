@@ -15,8 +15,6 @@ namespace AccountManager.Data.DataServices
             : base(mapper, context)
         {
             
-        }
-
-     
+        }     
     }
 }
