@@ -52,12 +52,26 @@ namespace AccountManager.Data.Core
             return Mapper.ProjectTo<TDto>(table);
         }
 
-
-
-        public IQueryable<TDto> GeTAll<TDto>(Expression<Func<TEntity, bool>> filter)
+        public IQueryable<TDto> GetAll<TDto>(Expression<Func<TEntity, bool>> filter)
         {
             DbSet<TEntity> table = Context.Set<TEntity>();
             return Mapper.ProjectTo<TDto>(table.Where(filter));
+        }
+
+        public void Delete(TId id)
+        {
+            DbSet<TEntity> table = Context.Set<TEntity>();
+            TEntity entityDelete = table.Find(id);
+            table.Remove(entityDelete);
+            if (Context.ChangeTracker.HasChanges())
+                Context.SaveChanges();
+        }
+
+        public TDto GetById<TDto>(TId id)
+        {
+            DbSet<TEntity> table = Context.Set<TEntity>();
+            TEntity entity = table.Find(id);
+            return Mapper.Map<TDto>(entity);
         }
     }
 }
