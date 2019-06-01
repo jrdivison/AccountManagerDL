@@ -2,7 +2,6 @@
 using AccountManager.Data.Models.DTO;
 using Microsoft.AspNetCore.Mvc;
 using System;
-using System.Linq;
 using System.Collections.Generic;
 
 namespace AccountManager.API.Account
@@ -32,14 +31,6 @@ namespace AccountManager.API.Account
         {
             service.AddOrUpdate<AccountDTO>(model);
             return Ok();
-        }
-
-
-        [HttpGet("AccountPagging")]
-        public IActionResult Pagging(int accountTypeId, int page, int rowPage)
-        {
-            return Ok(service.GetAll<AccountDTO>(a => a.AccountTypeId == accountTypeId)
-                .Pagging(page, rowPage)); 
         }
     }
 }

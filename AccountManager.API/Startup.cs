@@ -15,6 +15,7 @@ using Microsoft.EntityFrameworkCore;
 using AccountManager.Data.DataServices;
 using AutoMapper;
 using Swashbuckle.AspNetCore.Swagger;
+using AccountManager.API.Filters;
 
 namespace AccountManager.API
 {
@@ -48,7 +49,14 @@ namespace AccountManager.API
                     Version ="v1"
                 });
             });
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+            services.AddMvc(options => {
+                options.Filters.Add(typeof(ValidModelFilterMiddleware));
+            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
+
+            services.Configure<ApiBehaviorOptions>(options =>
+            {
+                options.SuppressModelStateInvalidFilter = true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -71,6 +79,8 @@ namespace AccountManager.API
                 c.RoutePrefix = string.Empty;
             });
             app.UseHttpsRedirection();
+            app.UseMiddleware(typeof(ErrorHandlerFilterMiddlewarer));
+
             app.UseMvc();
         }
     }

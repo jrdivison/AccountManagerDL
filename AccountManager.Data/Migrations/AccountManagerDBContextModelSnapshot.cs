@@ -44,57 +44,6 @@ namespace AccountManager.Data.Migrations
                         .HasFilter("[Code] IS NOT NULL");
 
                     b.ToTable("Account");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            AccountTypeId = 1,
-                            Code = "1.1",
-                            Name = "Caja y Bancos"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            AccountTypeId = 1,
-                            Code = "1.2",
-                            Name = "Activo Circulante"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            AccountTypeId = 1,
-                            Code = "1.3",
-                            Name = "Efectivo"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            AccountTypeId = 1,
-                            Code = "1.4",
-                            Name = "Cuentas por Cobrar"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            AccountTypeId = 2,
-                            Code = "2.1",
-                            Name = "Pasivo y Capital"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            AccountTypeId = 2,
-                            Code = "2.2",
-                            Name = "Cuentas por Pagar"
-                        },
-                        new
-                        {
-                            Id = 7,
-                            AccountTypeId = 2,
-                            Code = "2.3",
-                            Name = "Efectos por Pagar"
-                        });
                 });
 
             modelBuilder.Entity("AccountManager.Data.Models.AccountType", b =>
@@ -118,20 +67,6 @@ namespace AccountManager.Data.Migrations
                         .HasFilter("[Code] IS NOT NULL");
 
                     b.ToTable("AccountType");
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Code = "1.",
-                            Name = "Activos"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            Code = "2.",
-                            Name = "Pasivos"
-                        });
                 });
 
             modelBuilder.Entity("AccountManager.Data.Models.Account", b =>
