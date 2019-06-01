@@ -57,6 +57,7 @@ namespace AccountManager.Data.Core
             DbSet<TEntity> table = Context.Set<TEntity>();
             return Mapper.ProjectTo<TDto>(table.Where(filter));
         }
+
         public void Delete(TId id)
         {
             DbSet<TEntity> table = Context.Set<TEntity>();

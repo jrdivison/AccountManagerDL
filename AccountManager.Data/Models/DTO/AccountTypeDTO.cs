@@ -1,4 +1,5 @@
-﻿using System;
+﻿using AccountManager.Data.Resources;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
@@ -6,12 +7,15 @@ using System.Text;
 namespace AccountManager.Data.Models.DTO
 {
     public class AccountTypeDTO
-    {
+    { 
         public int Id { get; set; }
-        [Required(ErrorMessage = "{0} es requerido")]
-        [Display(Name = "Codigo")]
+
+        [Required(ErrorMessageResourceType = typeof(Errors), ErrorMessageResourceName = "Required")]
+        [MinLength(2, ErrorMessage = "{0} debe tener al menos dos (2) caracteres")]
+        [Display(Name = "Codigo o Identificador")]
         public string Code { get; set; }
-        [Required(ErrorMessage = "{0} es requerido")]
+
+        [Required(ErrorMessageResourceType = typeof(Errors), ErrorMessageResourceName = "Required")]
         [Display(Name = "Nombre")]
         public string Name { get; set; }
     }

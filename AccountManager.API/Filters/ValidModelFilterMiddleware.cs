@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace AccountManager.API.Filters
 {
-    public class ValidModelFilterMiddleware : ActionFilterAttribute
+    public class ValidModelFilterMiddleware
+        : ActionFilterAttribute
     {
         public override void OnActionExecuting(ActionExecutingContext context)
         {
             if (!context.ModelState.IsValid)
-            {
-                context.Result = new BadRequestObjectResult(context.ModelState);
-            }
+                context.Result = 
+                    new BadRequestObjectResult(context.ModelState);
         }
     }
 }

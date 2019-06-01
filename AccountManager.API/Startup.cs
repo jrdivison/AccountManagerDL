@@ -16,6 +16,8 @@ using AccountManager.Data.DataServices;
 using AutoMapper;
 using Swashbuckle.AspNetCore.Swagger;
 using AccountManager.API.Filters;
+using AccountManager.API.Security;
+using AccountManager.API.Config;
 
 namespace AccountManager.API
 {
@@ -31,32 +33,12 @@ namespace AccountManager.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<AccountManagerDbContext>(opt =>
-            {
 
-                opt.UseSqlServer(Configuration.GetConnectionString("default"), o =>
-                {
-                    o.MigrationsAssembly(typeof(AccountManagerDbContext).Assembly.FullName);
-                });
-            });
-            services.AddAutoMapper();
-            services.AddTransient<AccountDataService>();
-            services.AddTransient<AccountTypeDataService>();
-            services.AddSwaggerGen(c =>
-            {
-                c.SwaggerDoc("v1", new Info {
-                    Title= "Demo API",
-                    Version ="v1"
-                });
-            });
-            services.AddMvc(options => {
-                options.Filters.Add(typeof(ValidModelFilterMiddleware));
-            }).SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
-
-            services.Configure<ApiBehaviorOptions>(options =>
-            {
-                options.SuppressModelStateInvalidFilter = true;
-            });
+            services.ConfigureServiceDbContext(Configuration);
+            services.ConfigureServiceSecurity(Configuration);
+            services.ConfigureServiceDependency(Configuration);
+            services.ConfigureServiceSwagger(Configuration);
+            services.ConfigureServiceMvc(Configuration);                     
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -72,15 +54,9 @@ namespace AccountManager.API
                 app.UseHsts();
             }
 
-            app.UseSwagger();
-            app.UseSwaggerUI(c=>
-            {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "Api Demo");
-                c.RoutePrefix = string.Empty;
-            });
+            app.ConfigureSwagger();
             app.UseHttpsRedirection();
-            app.UseMiddleware(typeof(ErrorHandlerFilterMiddlewarer));
-
+            app.UseMiddleware(typeof(ErrorHandlerFilterMiddleware));
             app.UseMvc();
         }
     }
