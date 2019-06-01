@@ -23,6 +23,7 @@ namespace AccountManager.Data
             modelBuilder.Entity<AccountType>()
                 .HasKey(r => r.Id);
 
+
             modelBuilder.Entity<Account>()
                 .HasKey(r => r.Id);
 
