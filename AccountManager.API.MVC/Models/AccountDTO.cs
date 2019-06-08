@@ -2,10 +2,8 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace AccountManager.Data.Models.DTO
+namespace AccountManager.API.MVC.Models
 {
-    public class AccountDTO
-    {
         public int Id { get; set; }
         public string Code { get; set; }
         public string Name { get; set; }

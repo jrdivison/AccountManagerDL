@@ -4,16 +4,14 @@ using AccountManager.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
-using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace AccountManager.Data.Migrations
 {
-    [DbContext(typeof(AccountManagerDbContext))]
-    [Migration("20190427161313_InitialState")]
-    partial class InitialState
+    [DbContext(typeof(ReservacionesDbContext))]
+    partial class ReservacionesDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -46,6 +44,57 @@ namespace AccountManager.Data.Migrations
                         .HasFilter("[Code] IS NOT NULL");
 
                     b.ToTable("Account");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccountTypeId = 1,
+                            Code = "1.1",
+                            Name = "Caja y Bancos"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccountTypeId = 1,
+                            Code = "1.2",
+                            Name = "Activo Circulante"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccountTypeId = 1,
+                            Code = "1.3",
+                            Name = "Efectivo"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccountTypeId = 1,
+                            Code = "1.4",
+                            Name = "Cuentas por Cobrar"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AccountTypeId = 2,
+                            Code = "2.1",
+                            Name = "Pasivo y Capital"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AccountTypeId = 2,
+                            Code = "2.2",
+                            Name = "Cuentas por Pagar"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AccountTypeId = 2,
+                            Code = "2.3",
+                            Name = "Efectos por Pagar"
+                        });
                 });
 
             modelBuilder.Entity("AccountManager.Data.Models.AccountType", b =>
@@ -69,6 +118,20 @@ namespace AccountManager.Data.Migrations
                         .HasFilter("[Code] IS NOT NULL");
 
                     b.ToTable("AccountType");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            Code = "1.",
+                            Name = "Activos"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            Code = "2.",
+                            Name = "Pasivos"
+                        });
                 });
 
             modelBuilder.Entity("AccountManager.Data.Models.Account", b =>

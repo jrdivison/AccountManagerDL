@@ -33,31 +33,21 @@ namespace AccountManager.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
             services.ConfigureServiceDbContext(Configuration);
-            services.ConfigureServiceSecurity(Configuration);
+            
             services.ConfigureServiceDependency(Configuration);
             services.ConfigureServiceSwagger(Configuration);
-            services.ConfigureServiceMvc(Configuration);                     
+            services.ConfigureServiceMvc(Configuration);
+            services.ConfigureServiceSecurity(Configuration);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
-            else
-            {
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-                app.UseHsts();
-            }
-
             app.ConfigureSwagger();
-            app.UseHttpsRedirection();
-            app.UseMiddleware(typeof(ErrorHandlerFilterMiddleware));
-            app.UseMvc();
+            app.ConfigureDependency();
+            app.UseAuthentication();
+            app.ConfigureMvc(env);
         }
     }
 }

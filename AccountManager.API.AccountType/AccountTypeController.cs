@@ -1,5 +1,6 @@
 ﻿using AccountManager.Data.DataServices;
 using AccountManager.Data.Models.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -8,6 +9,7 @@ namespace AccountManager.API.Account
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AccountTypeController
         : ControllerBase
     {

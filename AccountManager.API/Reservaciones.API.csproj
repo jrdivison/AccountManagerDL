@@ -15,8 +15,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\AccountManager.API.AccountType\AccountManager.API.AccountType.csproj" />
-    <ProjectReference Include="..\AccountManager.API.Account\AccountManager.API.Account.csproj" />
+    <ProjectReference Include="..\Reservaciones.API.AccountType\Reservaciones.API.AccountType.csproj" />
+    <ProjectReference Include="..\Reservaciones.Api.Account\Reservaciones.Api.Account.csproj" />
   </ItemGroup>
 
 </Project>

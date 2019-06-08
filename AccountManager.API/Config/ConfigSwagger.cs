@@ -12,16 +12,30 @@ namespace AccountManager.API.Config
     public static class ConfigSwagger
     {
         public static IServiceCollection ConfigureServiceSwagger(
-            this IServiceCollection services, 
+            this IServiceCollection services,
             IConfiguration configuration)
         {
             services.AddSwaggerGen(c =>
             {
+                var security = new Dictionary<string, IEnumerable<string>>
+                {
+                    { "Bearer", new string[] { } }
+                };
+
                 c.SwaggerDoc("v1", new Info
                 {
                     Title = "Demo API",
                     Version = "v1"
                 });
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "Uso Bearer {token}",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+                c.AddSecurityRequirement(security);
+                
             });
             return services;
         }

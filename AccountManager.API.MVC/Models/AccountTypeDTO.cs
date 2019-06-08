@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 
-namespace AccountManager.Data.Models.DTO
+namespace AccountManager.API.MVC.Models
 {
     public class AccountTypeDTO
     { 

@@ -1,5 +1,6 @@
 ﻿using AccountManager.API.Security;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -47,6 +48,14 @@ namespace AccountManager.API.Config
                     };
             });
             return services;
+        }
+
+
+        public static IApplicationBuilder ConfigureSecurity(
+        this IApplicationBuilder app)
+        {
+            app.UseAuthentication();
+            return app;
         }
     }
 }

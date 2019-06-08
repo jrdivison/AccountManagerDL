@@ -4,11 +4,13 @@ using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Linq;
 using System.Collections.Generic;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AccountManager.API.Account
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class AccountController
         : ControllerBase
     {

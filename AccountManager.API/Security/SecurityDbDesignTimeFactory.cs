@@ -21,7 +21,7 @@ namespace AccountManager.Data.Factory
                     typeof(SecurityDbContext).Assembly.FullName));
 
             var ctx = new SecurityDbContext(optionsBuilder.Options);
-                 return ctx;
+            return ctx;
         }
     }
 }
